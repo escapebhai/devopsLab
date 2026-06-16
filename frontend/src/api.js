@@ -1,7 +1,8 @@
-const BASE_URL = "/api/students";
+const API_ORIGIN = import.meta.env.VITE_API_URL ?? "";
+const BASE_URL = `${API_ORIGIN}/api/students`;
 
 export async function login(username, password) {
-  const res = await fetch("/api/auth/login", {
+  const res = await fetch(`${API_ORIGIN}/api/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, password }),
@@ -14,7 +15,7 @@ export async function login(username, password) {
 }
 
 export async function getStats() {
-  const res = await fetch("/api/stats");
+  const res = await fetch(`${API_ORIGIN}/api/stats`);
   if (!res.ok) throw new Error("Failed to fetch stats");
   return res.json();
 }
